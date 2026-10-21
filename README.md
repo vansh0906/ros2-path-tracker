@@ -26,6 +26,27 @@ Robot: |w| ≤ 2 rad/s, 0.15 s velocity lag, 50 Hz control, starts 20 cm off the
 
 <!--  -->
 
+```text
+Robot: diff-drive, |w| <= 2 rad/s, 0.15 s velocity lag; control at 50 Hz; starts 0.2 m off the path
+Figure-8: 8.4 m per lap (max curvature 1.87 1/m), 2 laps. Loop: 8.1 m per lap, 2 laps.
+
+scenario                        controller            settle   RMS CTE   max CTE  w rate   lap time
+figure-8, 0.3 m/s               Pure Pursuit          2.34 s    0.7 cm    1.7 cm   0.10     57.8 s
+figure-8, 0.3 m/s               LQR + feed-forward    2.82 s    0.2 cm    2.4 cm   0.10     57.9 s
+
+figure-8, 0.6 m/s               Pure Pursuit          1.46 s    1.3 cm    2.1 cm   0.34     29.3 s
+figure-8, 0.6 m/s               LQR + feed-forward    1.72 s    0.1 cm    0.6 cm   0.33     29.4 s
+
+loop, 0.6 m/s                   Pure Pursuit          1.64 s    2.4 cm    4.2 cm   0.50     29.0 s
+loop, 0.6 m/s                   LQR + feed-forward    1.88 s    0.6 cm    1.4 cm   0.76     29.3 s
+
+figure-8, 0.6 m/s, noisy odom   Pure Pursuit          1.48 s    1.3 cm    2.1 cm   3.00     29.2 s
+figure-8, 0.6 m/s, noisy odom   LQR + feed-forward    1.72 s    0.2 cm    0.4 cm   2.71     29.4 s
+
+settle = time to get within 3 cm of the path; errors are scored after the first 3 s
+w rate = mean |change in commanded angular velocity|, rad/s^2 (lower = smoother); lap time = both laps
+```
+
 ### ROS 2 simulation (all three nodes, in Docker)
 
 ```
