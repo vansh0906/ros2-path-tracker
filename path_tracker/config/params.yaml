@@ -1,0 +1,49 @@
+# Default parameters for the simulation (sim.launch.py). Every number needs a decimal point:
+# ROS 2 refuses an integer for a parameter that the node declares as a double.
+path_publisher:
+  ros__parameters:
+    shape: figure8            # figure8 | loop
+    laps: 2
+    figure8_half_width: 1.6   # m
+    loop_length: 3.0          # m
+    loop_width: 1.5           # m
+    loop_radius: 0.5          # m
+    frame_id: odom
+    relative_to_robot: false
+
+sim_robot:
+  ros__parameters:
+    physics_rate: 200.0       # Hz
+    odom_rate: 50.0           # Hz
+    start_x: 0.0
+    start_y: 0.2              # start 20 cm left of the path, to see the controller pull in
+    start_yaw: 0.0
+    max_v: 1.0                # m/s
+    max_w: 2.0                # rad/s
+    max_acc: 1.0              # m/s^2
+    max_alpha: 4.0            # rad/s^2
+    time_constant: 0.15       # s, how slowly the base follows a new velocity command
+    odom_xy_noise: 0.0        # m
+    odom_yaw_noise: 0.0       # rad
+    cmd_timeout: 0.5          # s, stop if /cmd_vel goes quiet
+
+tracker:
+  ros__parameters:
+    controller: lqr           # lqr | pure_pursuit
+    speed: 0.6                # m/s
+    control_rate: 50.0        # Hz
+    max_w: 2.0                # rad/s
+    max_lateral_acc: 0.6      # m/s^2, slows down in tight turns
+    goal_tolerance: 0.05      # m
+    slow_down_dist: 0.5       # m
+    pp_gain: 0.5              # Pure Pursuit look-ahead = pp_gain * v + pp_min_lookahead
+    pp_min_lookahead: 0.25    # m
+    lqr_q_e: 10.0             # LQR weight on cross-track error
+    lqr_q_th: 1.0             # LQR weight on heading error
+    lqr_r: 1.0                # LQR weight on turning effort
+    lqr_preview: 0.15         # s, curvature look-ahead for the feed-forward term
+    odom_topic: odom
+    cmd_vel_topic: cmd_vel
+    ground_truth_topic: ground_truth
+    odom_timeout: 0.5         # s, stop if odometry goes quiet
+    exit_on_goal: true

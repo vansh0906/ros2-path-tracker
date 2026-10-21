@@ -1,0 +1,8 @@
+build/
+install/
+log/
+results/
+.venv/
+__pycache__/
+.DS_Store
+bench_traj.csv

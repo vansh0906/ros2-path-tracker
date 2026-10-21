@@ -1,0 +1,16 @@
+name: ros2-build-test
+on: [push, pull_request]
+jobs:
+  build-test-sim:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build with colcon and run the unit tests (ROS 2 Humble in Docker)
+        run: docker build -t ros2-path-tracker .
+      - name: Run the full ROS 2 simulation with both controllers
+        run: |
+          mkdir -p results
+          docker run --rm -v "$PWD/results:/results" ros2-path-tracker controller:=lqr csv_path:=/results/lqr.csv
+          docker run --rm -v "$PWD/results:/results" ros2-path-tracker controller:=pure_pursuit csv_path:=/results/pure_pursuit.csv
+      - name: Fail if tracking error is too large
+        run: python3 scripts/summarize.py results/lqr.csv results/pure_pursuit.csv --max-rms-cm 3
