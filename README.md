@@ -28,11 +28,15 @@ Robot: |w| ≤ 2 rad/s, 0.15 s velocity lag, 50 Hz control, starts 20 cm off the
 
 ### ROS 2 simulation (all three nodes, in Docker)
 
-<!-- paste the summarize.py output here -->
+```
+log                               duration   settle   RMS CTE   max CTE  w rate
+results/lqr.csv                     29.4 s   1.74 s    0.2 cm    0.6 cm    0.33
+results/pure_pursuit.csv            29.3 s   1.50 s    1.3 cm    2.1 cm    0.31
+```
 
 ### Real robot
 
-<!-- optional: robot, speed, path, RMS / max error from your run -->
+Next step: run `robot.launch.py` on a ROSMASTER X3 at ASU.
 
 ## Run it
 
