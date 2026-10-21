@@ -1,6 +1,6 @@
 # ROS 2 C++ Path Tracker: Pure Pursuit and LQR for Differential-Drive Robots
 
-![ros2-build-test](../../actions/workflows/build.yml/badge.svg)
+![ros2-build-test](https://github.com/vansh0906/ros2-path-tracker/actions/workflows/build.yml/badge.svg)
 
 A ROS 2 (Humble) package in C++17 that makes a wheeled robot follow a path. It runs fully in simulation on any laptop through Docker, and the same nodes drive a real ROS 2 robot (TurtleBot 4, ROSMASTER X3 or any base that publishes `/odom` and takes `/cmd_vel`).
 
