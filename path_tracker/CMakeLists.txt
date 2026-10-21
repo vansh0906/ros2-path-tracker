@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.10)
 project(path_tracker)
 
 set(CMAKE_CXX_STANDARD 17)
